@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your post</title>
+</head>
+<body>
+
+<div class="d-flex justify-content-center" id="post" style="margin-bottom: 20px">
+</div>
+
+</body>
+
+<script>
+
+
+
+
+  document.addEventListener("DOMContentLoaded", function (event) {
+    var parameters = location.search.split("=");
+    id = parameters[parameters.length - 1]
+    load_post(id)
+  });
+
+  function load_post(id) {
+    const post = document.getElementById('post');
+    const url = 'http://localhost:8000/posts/' + id;
+
+    fetch(url)
+      .then((resp) => resp.json())
+      .then(function (data) {
+        return post.innerHTML += "<span>" + data.text_post + "</span>";
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+</script>
+
+</html>
